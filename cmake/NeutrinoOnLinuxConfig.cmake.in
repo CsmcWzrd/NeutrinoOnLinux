@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+find_dependency(X11)
+if(@NEUTRINO_HAVE_XFT@ OR @NEUTRINO_HAVE_WAYLAND@)
+    find_dependency(PkgConfig)
+endif()
+if(@NEUTRINO_HAVE_XFT@)
+    pkg_check_modules(XFT REQUIRED IMPORTED_TARGET xft)
+endif()
+if(@NEUTRINO_HAVE_WAYLAND@)
+    pkg_check_modules(WAYLAND REQUIRED IMPORTED_TARGET wayland-client)
+endif()
+include("${CMAKE_CURRENT_LIST_DIR}/NeutrinoOnLinuxTargets.cmake")
